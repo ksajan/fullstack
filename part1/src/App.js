@@ -1,5 +1,79 @@
 // import logo from './logo.svg';
-import React from 'react';
+import React, { useState } from 'react';
+
+
+const NewApp = (props) => {
+  const [ counter, setCounter ] = useState(0)
+  const incrementCounterByOne = () => setCounter(counter + 1)
+  const decrementCounterByOne = () => setCounter(counter - 1)
+  const setCounterToZero = () => setCounter(0)
+
+  return (
+    <div>
+    <Display counter={counter} />
+    <Button handleClick={incrementCounterByOne} text="Increment" />
+    <Button handleClick={decrementCounterByOne} text="Decrement" />
+    <Button handleClick={setCounterToZero} text="Reset" />
+    {/* <button onClick={incrementCounterByOne}>Increment</button>
+    <button onClick={decrementCounterByOne}>Decrement</button>
+    <button onClick={setCounterToZero}>Reset</button> */}
+    </div>
+  )
+}
+
+const Button = (props) => {
+  console.log("clicked")
+  return (
+    <button onClick={props.handleClick}>
+    {props.text}
+    </button>
+  )
+}
+
+// New version of the above Button component 
+const NewButton1 = ({handleClick, text}) => <>
+  <button onClick={handleClick}>
+    {text}
+  </button>
+</>
+
+  // const handleClick = () => {
+  //   setCounter(counter + 1)
+  //   console.log('clicked')
+  // }
+  // setTimeout(
+  //   () => setCounter(counter + 1),
+  //   1000
+  // )
+  // console.log('rendering...', counter)
+
+  // return (
+  //   <div>
+  //   <div>{counter}</div>
+  //   <button onClick={handleClick}>Click me</button>
+  //   <button onClick={() => setCounter(0)}>Reset counter</button>
+  //   </div>
+  // )
+// }
+
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
+
+const NewDisplay = ({counter}) => {
+  /*
+  This is a destructed component of
+  the Display component.
+  */
+  return (
+    <div>{counter}</div>
+  )
+}
+
+// new version o0f the above NewDisplay Function
+const NewDisplay2 = ({counter}) => <>{counter}</>
 
 const App = (props) => {
   const course = 'Half Stack application development'
@@ -89,4 +163,4 @@ const Total = (props) => {
 }
 
 
-export default App;
+export default NewApp;
