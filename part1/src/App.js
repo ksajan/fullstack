@@ -32,6 +32,20 @@ const App2d = () => {
   )
 }
 
+const StatisticLine = (props) => {
+
+  if (props.text === 'positive') {
+    return (
+      <p>{props.text} {props.value} %</p>
+    )
+  }
+  return (
+    <div>
+      <p>{props.text} {props.value}</p>
+    </div>
+  )
+}
+
 const Statistics = (props) => {
   const total = props.good + props.neutral + props.bad;
   const average = (props.good - props.bad) / total;
@@ -47,12 +61,19 @@ const Statistics = (props) => {
 
   return (
     <div>
-      <p>good {props.good}</p>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="total" value={props.total} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={positive} />
+      
+      {/* <p>good {props.good}</p>
       <p>neutral {props.neutral}</p>
       <p>bad {props.bad}</p>
       <p>all {total}</p>
       <p>average {average}</p>
-      <p>positive {positive} %</p>
+      <p>positive {positive} %</p> */}
     </div>
   )
 }
