@@ -2,6 +2,71 @@
 import React, { useState } from 'react';
 
 
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        the app is used by pressing the buttons
+      </div>
+    )
+  }
+  return (
+    <div>
+    buttions press history: {props.allClicks.join(' ')}
+    </div>
+  )
+}
+
+const NewButton = ({handleClick, text}) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+
+const App2 = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+  }
+  return (
+    <div>
+      {left}
+      <NewButton handleClick={handleLeftClick} text={'left'} />
+      <NewButton handleClick={handleRightClick} text={'right'} />
+      {/* <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button> */}
+      {right}
+      {/* <p>{allClicks.join("    ")}</p>
+       */}
+       <History allClicks={allClicks} />
+    </div>
+  )
+}
+
+//   return (
+//     <div>
+//     {left}
+//     <button onClick={() => setLeft(left + 1)}>
+//       left
+//     </button>
+//     <button onClick={() => setRight(right + 1)}>
+//       right
+//     </button>
+//     {right}
+//     </div>
+//   )
+// }
+
 const NewApp = (props) => {
   const [ counter, setCounter ] = useState(0)
   const incrementCounterByOne = () => setCounter(counter + 1)
@@ -163,4 +228,4 @@ const Total = (props) => {
 }
 
 
-export default NewApp;
+export default App2;
