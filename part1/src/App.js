@@ -36,12 +36,30 @@ const StatisticLine = (props) => {
 
   if (props.text === 'positive') {
     return (
-      <p>{props.text} {props.value} %</p>
+      <div>
+      <table>
+      <tbody>
+        <tr>
+          <td>{props.text}</td>
+          <td>{props.value} %</td>
+        </tr>
+      </tbody>
+      </table>
+      {/* <p>{props.text} {props.value} %</p> */}
+      </div>
     )
   }
   return (
     <div>
-      <p>{props.text} {props.value}</p>
+    <table>
+    <tbody>
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.value}</td>
+      </tr>
+    </tbody>
+      </table>
+      {/* <p>{props.text} {props.value}</p> */}
     </div>
   )
 }
