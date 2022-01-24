@@ -61,6 +61,19 @@ const App = () => {
       [selected]: votes[selected] + 1
     })
   }
+
+  const mostVotes = () => {
+    let max = 0
+    let maxIndex = 0
+    for (let i = 0; i < len; i++) {
+      if (votes[i] > max) {
+        max = votes[i]
+        maxIndex = i
+      }
+    }
+    return maxIndex
+  }
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
@@ -69,6 +82,8 @@ const App = () => {
       <Button handleClick={handleClick} text={'Next anecdote'} />
       <Button handleClick={handleVoteClick} text={'Vote'} />
       {/* {anecdotes[selected]} */}
+      <h1>Anecdote with most votes</h1>
+      <Display text={anecdotes[mostVotes()]} />
     </div>
   )
 }
