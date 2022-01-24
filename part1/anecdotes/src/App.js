@@ -34,16 +34,16 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
   const [selected, setSelected] = useState(0)
-  
+  const len = anecdotes.length
+  console.log(len)
   const handleClick = () => {
-    // console.log(anecdotes.length)
-    let index = GetRandomInt(anecdotes.length)
+    console.log(Math.floor(Math.random() * (anecdotes.length)))
+    let index = Math.floor(Math.random() * (anecdotes.length))
     while (index === selected) {
-      index = GetRandomInt(anecdotes.length)
+      index = Math.floor(Math.random() * (anecdotes.length))
     }
     setSelected(index)
   }
-  console.log(GetRandomInt(0, anecdotes.length))
   return (
     <div>
       <h1>Anecdote of the day</h1>
