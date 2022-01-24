@@ -2,6 +2,164 @@
 import React, { useState } from 'react';
 
 
+
+const App2d = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
+  const handleGood = () => {
+    setGood(good + 1);
+  }
+
+  const handleNeutral = () => {
+    setNeutral(neutral + 1);
+  }
+
+  const handleBad = () => {
+    setBad(bad + 1);
+  }
+
+  return (
+    <div>
+      <h1>Give Feedback</h1>
+      <NewButton handleClick={handleGood} text="good" />
+      <NewButton handleClick={handleNeutral} text="neutral" />
+      <NewButton handleClick={handleBad} text="bad" />
+      <h1>Statistics</h1>
+      <Statistics good={good} neutral={neutral} bad={bad} />
+    </div>
+  )
+}
+
+const StatisticLine = (props) => {
+
+  if (props.text === 'positive') {
+    return (
+      <div>
+      <table>
+      <tbody>
+        <tr>
+          <td>{props.text}</td>
+          <td>{props.value} %</td>
+        </tr>
+      </tbody>
+      </table>
+      {/* <p>{props.text} {props.value} %</p> */}
+      </div>
+    )
+  }
+  return (
+    <div>
+    <table>
+    <tbody>
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.value}</td>
+      </tr>
+    </tbody>
+      </table>
+      {/* <p>{props.text} {props.value}</p> */}
+    </div>
+  )
+}
+
+const Statistics = (props) => {
+  const total = props.good + props.neutral + props.bad;
+  const average = (props.good - props.bad) / total;
+  const positive = props.good / total * 100;
+
+  if (total === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="total" value={props.total} />
+      <StatisticLine text="average" value={average} />
+      <StatisticLine text="positive" value={positive} />
+      
+      {/* <p>good {props.good}</p>
+      <p>neutral {props.neutral}</p>
+      <p>bad {props.bad}</p>
+      <p>all {total}</p>
+      <p>average {average}</p>
+      <p>positive {positive} %</p> */}
+    </div>
+  )
+}
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>
+        the app is used by pressing the buttons
+      </div>
+    )
+  }
+  return (
+    <div>
+    buttions press history: {props.allClicks.join(' ')}
+    </div>
+  )
+}
+
+const NewButton = ({handleClick, text}) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+
+const App2 = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+  }
+  return (
+    <div>
+      {left}
+      <NewButton handleClick={handleLeftClick} text={'left'} />
+      <NewButton handleClick={handleRightClick} text={'right'} />
+      {/* <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button> */}
+      {right}
+      {/* <p>{allClicks.join("    ")}</p>
+       */}
+       <History allClicks={allClicks} />
+    </div>
+  )
+}
+
+//   return (
+//     <div>
+//     {left}
+//     <button onClick={() => setLeft(left + 1)}>
+//       left
+//     </button>
+//     <button onClick={() => setRight(right + 1)}>
+//       right
+//     </button>
+//     {right}
+//     </div>
+//   )
+// }
+
 const NewApp = (props) => {
   const [ counter, setCounter ] = useState(0)
   const incrementCounterByOne = () => setCounter(counter + 1)
@@ -163,4 +321,4 @@ const Total = (props) => {
 }
 
 
-export default NewApp;
+export default App2d;
