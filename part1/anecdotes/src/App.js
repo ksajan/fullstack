@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const GetRandomInt = ({max}) => {
+const GetRandomInt = (max) => {
   console.log(max)
   return Math.floor(Math.random() * (max))
 }
@@ -33,23 +33,57 @@ const App = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
+
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState({
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0
+  })
+
   const len = anecdotes.length
-  console.log(len)
+
   const handleClick = () => {
-    console.log(Math.floor(Math.random() * (anecdotes.length)))
-    let index = Math.floor(Math.random() * (anecdotes.length))
+    let index = GetRandomInt(len) //Math.floor(Math.random() * (anecdotes.length))
     while (index === selected) {
-      index = Math.floor(Math.random() * (anecdotes.length))
+      index = GetRandomInt(len)
     }
     setSelected(index)
   }
+
+  const handleVoteClick = () => {
+    setVotes({
+      ...votes,
+      [selected]: votes[selected] + 1
+    })
+  }
+
+  const mostVotes = () => {
+    let max = 0
+    let maxIndex = 0
+    for (let i = 0; i < len; i++) {
+      if (votes[i] > max) {
+        max = votes[i]
+        maxIndex = i
+      }
+    }
+    return maxIndex
+  }
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
       <Display text={anecdotes[selected]} />
+      <Display text={`has ${votes[selected]} votes`} />
       <Button handleClick={handleClick} text={'Next anecdote'} />
+      <Button handleClick={handleVoteClick} text={'Vote'} />
       {/* {anecdotes[selected]} */}
+      <h1>Anecdote with most votes</h1>
+      <Display text={anecdotes[mostVotes()]} />
     </div>
   )
 }
