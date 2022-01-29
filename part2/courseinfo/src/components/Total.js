@@ -17,9 +17,10 @@ const Total = ({ parts }) => {
     const len = parts.length
     return (
         <div>
-            <p>Total of {len} exercise(s)</p>
+            <p>Total of {len} parts</p>
+            <Totatal parts={parts} />
         </div>
     )
 }
 
-export default Total
+export default Total 
