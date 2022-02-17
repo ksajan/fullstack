@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Note from './components/Note'
-import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -10,7 +9,7 @@ const App = () => {
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ]) 
   const [newName, setNewName] = useState('')
-  const [message, setMessage] = useState(null)
+  // const [message, setMessage] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
 
@@ -62,7 +61,7 @@ const App = () => {
   filter === ""
   ? persons
   : persons.filter((person) => person.name.toLowerCase().includes(filter.toLowerCase()))
-  
+
   return (
     <div>
       <h2>Phonebook</h2>
